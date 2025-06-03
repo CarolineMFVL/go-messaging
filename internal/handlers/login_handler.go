@@ -3,10 +3,12 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
+	"nls-go-messaging/internal/models"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 var jwtKey = []byte("super-secret-key")
@@ -25,7 +27,9 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var creds Credentials
 	json.NewDecoder(r.Body).Decode(&creds)
 
-	var user User
+	var user models.User
+	var DB *gorm.DB
+	
 	result := DB.Where("username = ?", creds.Username).First(&user)
 	if result.Error != nil {
 		http.Error(w, "Utilisateur non trouvé", http.StatusUnauthorized)
