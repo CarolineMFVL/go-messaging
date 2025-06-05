@@ -5,12 +5,14 @@ import (
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
+	"nls-go-messaging/internal/handlers"
+	"nls-go-messaging/internal/handlers/database"
 	"testing"
 	// adapte ce nom selon ton module
 )
 
 func init() {
-	&InitDB()
+	database.InitDB()
 }
 
 func TestRegisterAndLogin(t *testing.T) {
@@ -22,7 +24,7 @@ func TestRegisterAndLogin(t *testing.T) {
 	req.Header.Set("Content-Type", "application/json")
 	w := httptest.NewRecorder()
 
-	messaging_backend.RegisterHandler(w, req)
+	handlers.RegisterHandler(w, req)
 	if w.Code != http.StatusCreated {
 		t.Fatalf("échec register: status %d", w.Code)
 	}
@@ -32,7 +34,7 @@ func TestRegisterAndLogin(t *testing.T) {
 	req.Header.Set("Content-Type", "application/json")
 	w = httptest.NewRecorder()
 
-	messaging_backend.LoginHandler(w, req)
+	handlers.LoginHandler(w, req)
 	if w.Code != http.StatusOK {
 		t.Fatalf("échec login: status %d", w.Code)
 	}

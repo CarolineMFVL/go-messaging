@@ -2,12 +2,15 @@ package main
 
 import (
 	"log"
+	"nls-go-messaging/internal/models"
 
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 func SeedDB() {
-	users := []User{
+	var DB *gorm.DB
+	users := []models.User{
 		{Username: "alice", Password: "password123"},
 		{Username: "bob", Password: "secure456"},
 	}

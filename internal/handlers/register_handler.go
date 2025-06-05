@@ -1,7 +1,17 @@
 package handlers
 
+import (
+	"encoding/json"
+	"net/http"
+	"nls-go-messaging/internal/models"
+
+	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
+)
+
 func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	var creds Credentials
+	var DB gorm.DB
 	json.NewDecoder(r.Body).Decode(&creds)
 
 	if creds.Username == "" || creds.Password == "" {
@@ -10,7 +20,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Vérifier si l'utilisateur existe déjà
-	var existing User
+	var existing models.User
 	result := DB.Where("username = ?", creds.Username).First(&existing)
 	if result.Error == nil {
 		http.Error(w, "Nom d'utilisateur déjà utilisé", http.StatusConflict)
@@ -24,7 +34,7 @@ func RegisterHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user := User{
+	user := models.User{
 		Username: creds.Username,
 		Password: string(hashedPassword),
 	}

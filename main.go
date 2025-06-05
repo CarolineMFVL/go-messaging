@@ -3,12 +3,20 @@ package main
 import (
 	"log"
 	"net/http"
-	"github.com/gorilla/mux"
 	"nls-go-messaging/internal/handlers"
+	"nls-go-messaging/internal/handlers/database"
+	"os"
+
+	"github.com/gorilla/mux"
+	//"nls-go-messaging/internal/handlers/database/orm"
+	//"log"
+	"nls-go-messaging/internal/utils"
 )
 
 func main() {
-	InitDB() // ← Ajout ici
+	//log.SetFlags(log.LstdFlags | log.Lshortfile) // Affiche date, heure et fichier source
+	utils.InitLogger()
+	database.InitDB() // ← Ajout ici
 
 	if os.Getenv("SEED_DB") == "1" {
 		SeedDB()
@@ -24,26 +32,3 @@ func main() {
 	log.Println("Serveur sur :4000")
 	log.Fatal(http.ListenAndServe(":4000", r))
 }
-
-InitDB() {
-	host := os.Getenv("PG_HOST")
-	user := os.Getenv("PG_USER")
-	password := os.Getenv("PG_PASSWORD")
-	dbname := os.Getenv("PG_DB")
-	port := os.Getenv("PG_PORT")
-
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		host, user, password, dbname, port)
-
-	var err error
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		log.Fatal("Erreur connexion PostgreSQL: ", err)
-	}
-
-	err = DB.AutoMigrate(&models.User{}, &models.ThreadModel{})
-	if err != nil {
-		log.Fatal("Erreur migration DB: ", err)
-	}
-}
-
