@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: go-format-lint-test
+        # This hook runs Go format, lint, and test.
+        name: Go format, lint, and test
+        language: script
+        pass_filenames: true
+        types: [go]

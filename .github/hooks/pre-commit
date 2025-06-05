@@ -1,0 +1,10 @@
+#!/bin/sh
+echo "🚦 Pre-commit check en cours..."
+
+make format
+if [ $? -ne 0 ]; then
+  echo "❌ Formatage échoué"
+  exit 1
+fi
+
+echo "✅ Pre-commit check réussi"
