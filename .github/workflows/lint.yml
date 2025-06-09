@@ -3,9 +3,9 @@ name: Lint Go Code
 
 on:
   push:
-    branches: [main]
+    branches: [toreplace] #[main]
   pull_request:
-    branches: [main]
+    branches: [toreplace] #[main]
 
 jobs:
   lint:
