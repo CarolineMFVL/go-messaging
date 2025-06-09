@@ -19,7 +19,7 @@ func main() {
 	database.InitDB() // ← Ajout ici
 
 	if os.Getenv("SEED_DB") == "1" {
-		SeedDB()
+		//SeedDB()
 		log.Println("Base de données seedée")
 		return
 	}

@@ -7,6 +7,6 @@ type User struct {
 }
 
 type ThreadModel struct {
-	ID    uint   `gorm:"primaryKey"`
-	Name  string `gorm:"uniqueIndex"`
+	ID   uint   `gorm:"primaryKey"`
+	Name string `gorm:"uniqueIndex"`
 }

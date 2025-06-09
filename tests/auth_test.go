@@ -6,14 +6,14 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"nls-go-messaging/internal/handlers"
-	"nls-go-messaging/internal/handlers/database"
+
+	//"nls-go-messaging/internal/handlers/database"
 	"testing"
-	// adapte ce nom selon ton module
 )
 
-func init() {
+/* func init() {
 	database.InitDB()
-}
+} */
 
 func TestRegisterAndLogin(t *testing.T) {
 	// Enregistre un nouvel utilisateur

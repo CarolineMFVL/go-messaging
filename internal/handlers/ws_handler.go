@@ -50,19 +50,18 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 
 	go client.readPump(thread)
 	go client.writePump()
-/* tokenStr := r.URL.Query().Get("token")
-claims := &Claims{}
-token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
-	return jwtKey, nil
-})
+	/* tokenStr := r.URL.Query().Get("token")
+	   claims := &Claims{}
+	   token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
+	   	return jwtKey, nil
+	   })
 
-if err != nil || !token.Valid {
-	http.Error(w, "Unauthorized", http.StatusUnauthorized)
-	return
-} username := claims.Username*/
+	   if err != nil || !token.Valid {
+	   	http.Error(w, "Unauthorized", http.StatusUnauthorized)
+	   	return
+	   } username := claims.Username*/
 
 }
-
 
 func (c *Client) readPump(t *Thread) {
 	defer func() {

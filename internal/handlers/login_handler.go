@@ -29,7 +29,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 	var user models.User
 	var DB *gorm.DB
-	
+
 	result := DB.Where("username = ?", creds.Username).First(&user)
 	if result.Error != nil {
 		http.Error(w, "Utilisateur non trouvé", http.StatusUnauthorized)
