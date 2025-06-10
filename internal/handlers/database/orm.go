@@ -37,7 +37,7 @@ func InitDB( /* dialect, host, port, dbname, pass string */ ) (*gorm.DB, error) 
 		log.Fatal("Erreur connexion PostgreSQL: ", err)
 	}
 
-	err = DB.AutoMigrate(&models.User{}, &models.ThreadModel{}, &database.Document{})
+	err = DB.AutoMigrate(&models.User{}, &models.ThreadModel{}, Document{})
 	if err != nil {
 		log.Fatal("Erreur migration DB: ", err)
 	}
