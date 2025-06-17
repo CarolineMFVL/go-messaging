@@ -38,6 +38,18 @@ Démarrez les services avec Docker Compose :
 
 `docker-compose up --build`
 
+1. Créez le rôle/utilisateur dans PostgreSQL
+   Dans un terminal, lancez :
+
+`psql -h localhost -p 5433 -U postgres -d messaging_db`
+
+postgres
+Puis, dans le shell psql :
+
+````CREATE ROLE cmf WITH LOGIN PASSWORD 'test1234';
+ALTER ROLE cmf CREATEDB;
+GRANT ALL ON SCHEMA public TO cmf;```
+
 L'application sera disponible sur http://localhost:4000.
 
 En local
@@ -56,3 +68,6 @@ Tests
 Pour exécuter les tests, utilisez la commande suivante :
 
 `go test ./...`
+
+
+````
