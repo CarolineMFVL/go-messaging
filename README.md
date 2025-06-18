@@ -6,12 +6,9 @@
 
 ## Fonctionnalités
 
-- Authentification des utilisateurs (inscription et connexion)
 - Gestion des threads de discussion
 - Messagerie en temps réel via WebSocket
 - Migration automatique de la base de données
-- Seed de données pour initialiser la base
-- API REST documentée avec Swagger
 
 ## Prérequis
 
@@ -41,7 +38,7 @@ Démarrez les services avec Docker Compose :
 1. Créez le rôle/utilisateur dans PostgreSQL
    Dans un terminal, lancez :
 
-`psql -h localhost -p 5433 -U postgres -d messaging_db`
+`psql -h localhost -p 5432 -U postgres -d nls_db`
 
 postgres
 Puis, dans le shell psql :

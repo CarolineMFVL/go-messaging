@@ -8,9 +8,9 @@ volumes:
 
 services:
   # PostgreSQL
-  messaging-postgres:
+  nls-postgres:
     image: postgres:16.9-bullseye
-    container_name: postgres
+    container_name: nls-postgres
     restart: unless-stopped
     ports:
       - "$PG_PORT:5432"
@@ -25,7 +25,6 @@ services:
       POSTGRES_DB: $PG_DB
     networks:
       - postgres-network
-  #adminer
   adminer:
     image: adminer:5.2.1
     container_name: adminer

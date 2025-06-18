@@ -37,9 +37,9 @@ func InitDB() (*gorm.DB, error) {
 	port := os.Getenv("PG_PORT")
 
 	// Connexion temporaire à la base 'postgres'
-	connStr := "postgres://postgres:test1234@localhost:5433/postgres?sslmode=disable"
+	connStr := os.Getenv(("CONNEXION_STRING"))
 
-	// postgresDsn := fmt.Sprintf("host=%s user=%s password=%s dbname=messaging_db port=%s sslmode=disable", host, user, password, port)
+	// postgresDsn := fmt.Sprintf("host=%s user=%s password=%s dbname=nls_db port=%s sslmode=disable", host, user, password, port)
 	sqlDB, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal("Erreur connexion PostgreSQL (postgres): ", err)
