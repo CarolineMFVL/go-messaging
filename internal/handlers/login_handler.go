@@ -23,6 +23,16 @@ type Claims struct {
 	jwt.RegisteredClaims
 }
 
+// LoginHandler godoc
+// @Summary Connexion utilisateur
+// @Description Authentifie un utilisateur et retourne un JWT
+// @Tags auth
+// @Accept  json
+// @Produce  json
+// @Param   credentials body handlers.Credentials true "Identifiants utilisateur"
+// @Success 200 {object} map[string]string
+// @Failure 401 {string} string "Unauthorized"
+// @Router /login [post]
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var creds Credentials
 	json.NewDecoder(r.Body).Decode(&creds)

@@ -1,0 +1,40 @@
+definitions:
+  handlers.Credentials:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Authentifie un utilisateur et retourne un JWT
+      parameters:
+      - description: Identifiants utilisateur
+        in: body
+        name: credentials
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.Credentials'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+      summary: Connexion utilisateur
+      tags:
+      - auth
+swagger: "2.0"

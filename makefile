@@ -5,11 +5,13 @@ install:
 		go mod tidy
 
 open-api:
-		swag init -o resources/public -g main.go
-		rm resources/publics/docs.go
-		rm resources/public/swagger.yaml
-		npx swagger2openapi ./resources/public/swagger.json -o ./resources/public/docs/open-api.yaml
-		rm resources/public/swagger.json
+		@echo "Génération de la documentation OpenAPI..."
+		swag init --output ./docs --generalInfo main.go
+#swag init -o resources/public -g main.go
+#rm resources/publics/docs.go
+#rm resources/public/swagger.yaml
+#npx swagger2openapi ./resources/public/swagger.json -o ./resources/public/docs/open-api.yaml
+#rm resources/public/swagger.json
 
 format:
 	@echo "🎨 Formatage du code Go..."
