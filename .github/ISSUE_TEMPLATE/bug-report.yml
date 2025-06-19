@@ -1,0 +1,60 @@
+# 📁 .github/ISSUE_TEMPLATE/bug-report.yml
+name: Bug Report
+description: Report something that's not working as expected
+title: "[Bug] <short description>"
+labels: [bug]
+assignees: ["CarolineMFVL"]
+
+body:
+  - type: markdown
+    attributes:
+      value: "🐞 **Bug Report Template**\n\nPlease fill in as much information as possible to help us debug the issue."
+
+  - type: input
+    id: summary
+    attributes:
+      label: Bug Summary
+      placeholder: e.g. Chat does not scroll to latest message
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      placeholder: |
+        1. Log in as user X
+        2. Send a message
+        3. Observe chat window
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      placeholder: e.g. Chat window should automatically scroll to the latest message
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      placeholder: e.g. Chat window stays stuck and requires manual scroll
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: e.g. macOS / Chrome 123 / Mobile Safari
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Logs or Screenshots (optional)
+      placeholder: Paste logs or drag screenshots here
+    validations:
+      required: false
