@@ -1,0 +1,39 @@
+# 📁 .github/ISSUE_TEMPLATE/technical-task.yml
+name: Technical Task
+description: For internal engineering work (refactoring, infra, cleanup...)
+title: "[Tech] <short description>"
+labels: [technical]
+assignees: ["CarolineMFVL"]
+
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: Task Summary
+      placeholder: e.g. Migrate WebSocket connection handler to a separate module
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal / Motivation
+      placeholder: Why is this task important?
+
+  - type: textarea
+    id: plan
+    attributes:
+      label: Implementation Plan (optional)
+      placeholder: |
+        - Create new `websocket.go`
+        - Move socket logic from `main.go`
+        - Add unit tests
+
+  - type: checkboxes
+    id: criteria
+    attributes:
+      label: Done When...
+      options:
+        - label: PR is merged
+        - label: Tests are added or updated
+        - label: No breaking changes

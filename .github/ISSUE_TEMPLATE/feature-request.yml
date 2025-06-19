@@ -1,0 +1,71 @@
+name: Feature Request
+description: Suggest a new feature or functionality
+title: "[Feature] <short description>"
+labels: [enhancement]
+assignees: ["CarolineMFVL"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        🚀 **Feature Request Template**
+
+        Please provide as much detail as possible to help us implement this feature properly.
+
+  - type: input
+    id: summary
+    attributes:
+      label: Feature Summary
+      placeholder: e.g. Add real-time typing indicators in chat
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe what this feature should do and why it's important.
+      placeholder: |
+        This feature will display when a user is currently typing in a thread. 
+        It improves real-time communication and mirrors common UX from apps like Slack or WhatsApp.
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Ideas
+      description: Share any technical suggestions, data structures, or APIs that could be used.
+      placeholder: |
+        - Use a `typing` event over Socket.io
+        - Maintain a map of active typers per thread
+        - Broadcast typing state to other connected clients
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Define what must be true for this issue to be considered complete.
+      options:
+        - label: Typing indicator is visible when someone is typing
+        - label: Typing indicator disappears after a few seconds of inactivity
+        - label: Works for multiple users simultaneously
+        - label: Accessible via screen reader
+
+  - type: input
+    id: deadline
+    attributes:
+      label: Deadline (optional)
+      placeholder: e.g. 2025-07-01
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
