@@ -1,4 +1,4 @@
-package middlwares
+package middlewares
 
 import (
 	"nls-go-messaging/internal/constants"

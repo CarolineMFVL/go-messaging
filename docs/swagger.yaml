@@ -1,40 +1,41 @@
-definitions:
-  handlers.Credentials:
-    properties:
-      password:
-        type: string
-      username:
-        type: string
-    type: object
 info:
   contact: {}
+  description: API de messagerie sécurisée par JWT
+  title: API Messaging
+  version: "1.0"
 paths:
-  /login:
-    post:
-      consumes:
-      - application/json
-      description: Authentifie un utilisateur et retourne un JWT
+  /ws/{threadId}:
+    get:
+      description: Ouvre une connexion WebSocket sur un thread
       parameters:
-      - description: Identifiants utilisateur
-        in: body
-        name: credentials
+      - description: ID du thread
+        in: path
+        name: threadId
         required: true
-        schema:
-          $ref: '#/definitions/handlers.Credentials'
+        type: string
       produces:
       - application/json
       responses:
-        "200":
-          description: OK
+        "101":
+          description: Switching Protocols
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
           schema:
             additionalProperties:
               type: string
             type: object
-        "401":
-          description: Unauthorized
-          schema:
-            type: string
-      summary: Connexion utilisateur
+      security:
+      - BearerAuth: []
+      summary: WebSocket protégé par JWT
       tags:
-      - auth
+      - ws
+securityDefinitions:
+  BearerAuth:
+    description: 'Type "Bearer" suivi d''un espace et de votre token JWT. Exemple :
+      "Bearer {token}"'
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

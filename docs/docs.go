@@ -15,73 +15,68 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/login": {
-            "post": {
-                "description": "Authentifie un utilisateur et retourne un JWT",
-                "consumes": [
-                    "application/json"
+        "/ws/{threadId}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
                 ],
+                "description": "Ouvre une connexion WebSocket sur un thread",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "auth"
+                    "ws"
                 ],
-                "summary": "Connexion utilisateur",
+                "summary": "WebSocket protégé par JWT",
                 "parameters": [
                     {
-                        "description": "Identifiants utilisateur",
-                        "name": "credentials",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/handlers.Credentials"
-                        }
+                        "type": "string",
+                        "description": "ID du thread",
+                        "name": "threadId",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
+                    "101": {
+                        "description": "Switching Protocols",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
                                 "type": "string"
                             }
                         }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
                     }
                 }
             }
         }
     },
-    "definitions": {
-        "handlers.Credentials": {
-            "type": "object",
-            "properties": {
-                "password": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
-                }
-            }
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "Type \"Bearer\" suivi d'un espace et de votre token JWT. Exemple : \"Bearer {token}\"",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
+	Version:          "1.0",
 	Host:             "",
 	BasePath:         "",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "API Messaging",
+	Description:      "API de messagerie sécurisée par JWT",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

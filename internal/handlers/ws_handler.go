@@ -2,10 +2,12 @@ package handlers
 
 import (
 	//"encoding/json"
+	"net/http"
+	"nls-go-messaging/internal/utils"
+	"sync"
+
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
-	"net/http"
-	"sync"
 )
 
 type ConnectionWrapper struct {
@@ -23,13 +25,23 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin: func(r *http.Request) bool { return true },
 }
 
+// HandleWebSocket godoc
+// @Summary WebSocket protégé par JWT
+// @Description Ouvre une connexion WebSocket sur un thread
+// @Tags ws
+// @Produce  json
+// @Param threadId path string true "ID du thread"
+// @Security BearerAuth
+// @Success 101 {string} string "Switching Protocols"
+// @Failure 401 {object} map[string]string
+// @Router /ws/{threadId} [get]
 func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	threadID := vars["threadId"]
 
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		http.Error(w, "WebSocket upgrade failed", http.StatusInternalServerError)
+		utils.RespondWithError(w, http.StatusInternalServerError, "WebSocket upgrade failed")
 		return
 	}
 
@@ -50,16 +62,7 @@ func HandleWebSocket(w http.ResponseWriter, r *http.Request) {
 
 	go client.readPump(thread)
 	go client.writePump()
-	/* tokenStr := r.URL.Query().Get("token")
-	   claims := &Claims{}
-	   token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
-	   	return jwtKey, nil
-	   })
-
-	   if err != nil || !token.Valid {
-	   	http.Error(w, "Unauthorized", http.StatusUnauthorized)
-	   	return
-	   } username := claims.Username*/
+	// Add gestion errors and close connections
 
 }
 
