@@ -31,8 +31,6 @@ func main() {
 	r.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	// Routes API
-	r.HandleFunc("/login", handlers.LoginHandler).Methods("POST")
-	r.HandleFunc("/register", handlers.RegisterHandler).Methods("POST")
 	r.HandleFunc("/ws/{threadId}", handlers.HandleWebSocket)
 
 	// (Optionnel) Route racine

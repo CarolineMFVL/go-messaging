@@ -73,6 +73,14 @@ func InitDB() (*gorm.DB, error) {
 	return db, err
 }
 
+type PG_DB struct {
+	DB *gorm.DB
+}
+
+func New(db *gorm.DB) *PG_DB {
+	return &PG_DB{DB: db}
+}
+
 /*
 func InitDB( /* dialect, host, port, dbname, pass string  ) (*gorm.DB, error) {
 	//var DB *gorm.DB
