@@ -17,3 +17,9 @@ const (
 	DBLocals        localsKey = "db"
 	RequestDBLocals localsKey = "request_db"
 )
+
+const (
+	JWTKeyLocals       = "jwtKey"
+	RequestJWTLocals   = "requestJWT"
+	StatusUnauthorized = 401
+)
